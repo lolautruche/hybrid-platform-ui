@@ -56,3 +56,20 @@ services:
         arguments:
             - "@ezsystems.platformui.component.maincontent"
         public: false
+
+    ezsystems.hybridui.toolbars.configurator:
+        class: EzSystems\HybridPlatformUi\Toolbars\RouteBasedConfigurator
+        arguments:
+            - "@ezsystems.platformui.component.app"
+        calls:
+            - [addRoutesMappings, [{'ez_urlalias': {'discovery': 1}}]]
+        public: false
+
+    ezsystems.hybridui.event_subscriber.app_toolbars:
+        class: EzSystems\HybridPlatformUi\EventSubscriber\AppToolbarsSubscriber
+        arguments:
+            - "@ezsystems.platformui.hybrid.request_matcher.admin"
+            - "@ezsystems.hybridui.toolbars.configurator"
+        tags:
+            - {name: kernel.event_subscriber}
+        public: false
