@@ -36,7 +36,7 @@ class RequestAppResponseRenderer implements AppResponseRenderer
     public function render(Response $response, App $app)
     {
         $app->setConfig(['mainContent' => ['result' => $response->getContent()]]);
-        $this->configureToolbars($app);
+        //$this->configureToolbars($app);
 
         $appResponse = $this->ajaxUpdateRequestMatcher->matches($this->request)
             ? new JsonResponse($app)
